@@ -17,14 +17,22 @@ ARCH=arm64 CROSS_COMPILE=/home/grads/c/celery1124/yocto-install_v3/LS2085A-SDK-2
 
 ## Run
 
+First bootup need to load the enable_arm_pmu driver to enable aarch64 PMU. The user space perf tool works like linux perf, the first main argument is the perf event number, then follow the program you want to run. Example as follow.
+
 ```bash
 insmod enable_arm_pmu.ko
-./perf 24 program
+./perf 24 ls /run
 ```
 
 Note: The perf event number is commented on perf_lib.h
 
-# Reference
+## Test platform
+
+EMC Dragon FPGA board
+
+## Reference
+https://github.com/zhiyisun/enable_arm_pmu(https://github.com/zhiyisun/enable_arm_pmu)
+
 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html(http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html)
 
 https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779(https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779)
