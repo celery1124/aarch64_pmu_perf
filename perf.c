@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 
         /* Setup pmu */
         reset_counter();
-        cycle_start = rdtsc64();
 	enable_pmu_event(event_num);
+        cycle_start = rdtsc64();
         event_start = read_pmu();
 
         /*Spawn a child to run the program.*/

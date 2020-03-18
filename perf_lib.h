@@ -1,6 +1,8 @@
 #ifndef PERF_LIB_H
 #define PERF_LIB_H
 
+#include <stdio.h>
+
 // Performance Monitors Cycle Count Register
 static inline uint32_t
 rdtsc64(void)
@@ -87,9 +89,10 @@ enable_pmu_event(uint32_t evtCount)
 	asm volatile("msr pmevtyper0_el0, %0" : : "r" (evtCount));
 	asm volatile("msr pmevtyper1_el0, %0" : : "r" (0x1e)); // chain counter 0&1
 	/*   Performance Monitors Count Enable Set register set bit 31&1&0 */
+	asm volatile("msr pmcntenset_el0, %0" : : "r" (80000000|3));
 	// uint32_t r = 0;
 	// asm volatile("mrs %0, pmcntenset_el0" : "=r" (r));
-	asm volatile("msr pmcntenset_el0, %0" : : "r" (80000000|3));
+	// printf("after pmu enable %x\n", r);
 #else
 #error Unsupported architecture/compiler!
 #endif
@@ -118,9 +121,10 @@ disable_pmu_event(uint32_t evtCount)
 {
 #if defined(__GNUC__) && defined __aarch64__
 	/*   Performance Monitors Count Enable Clr register: set bit 31&0&1 */
+	asm volatile("msr pmcntenclr_el0, %0" : : "r" (80000000|3));
 	// uint32_t r = 0;
 	// asm volatile("mrs %0, pmcntenclr_el0" : "=r" (r));
-	asm volatile("msr pmcntenclr_el0, %0" : : "r" (80000000|3));
+	// printf("after pmu disable %x\n", r);
 #else
 #error Unsupported architecture/compiler!
 #endif
