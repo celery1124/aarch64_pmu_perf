@@ -85,23 +85,28 @@ enable_pmu_event(uint32_t evtCount)
 	asm volatile("isb");
 	/* Just use counter 0 */
 	asm volatile("msr pmevtyper0_el0, %0" : : "r" (evtCount));
-	/*   Performance Monitors Count Enable Set register bit 30:1 disable, 31,1 enable */
+	asm volatile("msr pmevtyper1_el0, %0" : : "r" (0x1e)); // chain counter 0&1
+	/*   Performance Monitors Count Enable Set register set bit 1&0 */
 	uint32_t r = 0;
 
 	asm volatile("mrs %0, pmcntenset_el0" : "=r" (r));
-	asm volatile("msr pmcntenset_el0, %0" : : "r" (r|1));
+	asm volatile("msr pmcntenset_el0, %0" : : "r" (r|3));
 #else
 #error Unsupported architecture/compiler!
 #endif
 }
 
 // Read event counter
-static inline uint32_t
+static inline uint64_t
 read_pmu(void)
 {
 #if defined(__GNUC__) && defined __aarch64__
-        uint32_t r = 0;
-	asm volatile("mrs %0, pmevcntr0_el0" : "=r" (r)); 
+        uint32_t r0 = 0;
+        uint32_t r1 = 0;
+        uint64_t r = 0;
+	asm volatile("mrs %0, pmevcntr0_el0" : "=r" (r0)); 
+	asm volatile("mrs %0, pmevcntr1_el0" : "=r" (r1)); 
+	r = (uint64_t)r1 << 32 | r0;
 	return r;
 #else
 #error Unsupported architecture/compiler!
@@ -113,11 +118,11 @@ static inline void
 disable_pmu_event(uint32_t evtCount)
 {
 #if defined(__GNUC__) && defined __aarch64__
-	/*   Performance Monitors Count Enable Set register: clear bit 0 */
+	/*   Performance Monitors Count Enable Clr register: set bit 0&1 */
 	uint32_t r = 0;
 
-	asm volatile("mrs %0, pmcntenset_el0" : "=r" (r));
-	asm volatile("msr pmcntenset_el0, %0" : : "r" (r&&0xfffffffe));
+	asm volatile("mrs %0, pmcntenclr_el0" : "=r" (r));
+	asm volatile("msr pmcntenclr_el0, %0" : : "r" (r|3));
 #else
 #error Unsupported architecture/compiler!
 #endif
