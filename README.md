@@ -31,10 +31,10 @@ Note: The perf event number is commented on perf_lib.h
 EMC Dragon FPGA board
 
 ## Reference
-https://github.com/zhiyisun/enable_arm_pmu(https://github.com/zhiyisun/enable_arm_pmu)
+[https://github.com/zhiyisun/enable_arm_pmu](https://github.com/zhiyisun/enable_arm_pmu)
 
-http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html(http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html)
+[http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0488d/BIIFDEEJ.html)
 
-https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779(https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779)
+[https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779](https://static.docs.arm.com/ddi0487/fa/DDI0487F_a_armv8_arm.pdf?_ga=2.142050290.130834191.1584475779-1440830053.1584475779)
 
-https://developer.arm.com/tools-and-software/embedded/legacy-tools/ds-5-development-studio/resources/tutorials/using-the-pmu-event-counters-in-ds-5(https://developer.arm.com/tools-and-software/embedded/legacy-tools/ds-5-development-studio/resources/tutorials/using-the-pmu-event-counters-in-ds-5)
+[https://developer.arm.com/tools-and-software/embedded/legacy-tools/ds-5-development-studio/resources/tutorials/using-the-pmu-event-counters-in-ds-5](https://developer.arm.com/tools-and-software/embedded/legacy-tools/ds-5-development-studio/resources/tutorials/using-the-pmu-event-counters-in-ds-5)
